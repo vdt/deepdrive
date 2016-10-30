@@ -30,7 +30,7 @@ def download_file(url, path):
 
 
 def download_folder(url, path):
-    """Useful for downloading a folder as a zip from dropbox and unzipping it to path"""
+    """Useful for downloading a folder / zip file from dropbox and unzipping it to path"""
     print('Downloading', url)
     location = urllib.urlretrieve(url)
     location = location[0]

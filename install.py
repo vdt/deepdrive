@@ -20,6 +20,7 @@ from enforce_version import enforce_version
 CURR_DIR = os.path.dirname(os.path.realpath(__file__))
 GTAV_DIR = os.environ['GTAV_DIR']
 SAVED_GAMES_LOCATION = os.path.expanduser('~\\Documents\\Rockstar Games\\GTA V\\Profiles\\')
+WORKSPACE_DIR = os.path.dirname(os.environ['DEEPDRIVE_DIR'])
 
 logger = logging.getLogger(__name__)
 
@@ -34,10 +35,33 @@ def get_saved_games_profile_folders():
     return [SAVED_GAMES_LOCATION + profile for profile in profiles]
 
 
+def install_autoit():
+    print('Installing AutoIT')
+    utils.download_folder('https://www.dropbox.com/s/09mtrrr42putjty/AutoIt3.zip?dl=1', WORKSPACE_DIR)
+
+
+def install_caffe():
+    print('Installing Caffe')
+    utils.download_folder('https://www.dropbox.com/s/zt77lslfrmw28m4/caffe.zip?dl=1', WORKSPACE_DIR)
+
+
+def install_obs():
+    print('Installing OBS')
+    utils.download_folder('https://www.dropbox.com/s/v4p75gxyqy6t9pi/OBS-new.zip?dl=1', WORKSPACE_DIR)
+
+
 def setup():
     replace_saved_games()
-    utils.download_folder('https://www.dropbox.com/sh/fy6nha3ikm2ugij/AADm8SPKm5bX3Nl2qx69rCcYa?dl=1', GTAV_DIR)
+    stuff_that_goes_in_gtav_dir()
     enforce_version(GTAV_DIR)
+    install_autoit()
+    install_caffe()
+    install_obs()
+
+
+def stuff_that_goes_in_gtav_dir():
+    print('Installing ScriptHookV and XBOX360CE to GTAV directory')
+    utils.download_folder('https://www.dropbox.com/sh/fy6nha3ikm2ugij/AADm8SPKm5bX3Nl2qx69rCcYa?dl=1', GTAV_DIR)
 
 
 def replace_saved_games():
