@@ -7,13 +7,15 @@ import os
 import urllib
 import zipfile
 
+import shutil
+
 
 def detect_binary_changes(gtav_dir):
     md5_paths = [
-        ('e40919966756d7bcff79a9a98e4b9522',  os.path.join(gtav_dir, 'GTA5.exe')),
-        ('38e62da773629feb9369a2bd9cad8a53',  os.path.join(gtav_dir, 'GTAVLauncher.exe')),
-        ('e2e9e2ab49feb736381a7e34cc3e264b',  os.path.join(gtav_dir, 'update', 'update.rpf')),
-        ('7129fb28c6a679f36b9c9461e1cadf6a',  glob.glob(os.path.join(gtav_dir, 'Installers', 'Social-Club*.exe'))[0])
+        ('e40919966756d7bcff79a9a98e4b9522', os.path.join(gtav_dir, 'GTA5.exe')),
+        ('38e62da773629feb9369a2bd9cad8a53', os.path.join(gtav_dir, 'GTAVLauncher.exe')),
+        ('e2e9e2ab49feb736381a7e34cc3e264b', get_update_rpf_path(gtav_dir)),
+        ('7129fb28c6a679f36b9c9461e1cadf6a', get_social_club_path(gtav_dir))
     ]
 
     for md5_path in md5_paths:
@@ -32,6 +34,14 @@ FILE CHANGE DETECTED - %s
     return False
 
 
+def get_social_club_path(gtav_dir):
+    return glob.glob(os.path.join(gtav_dir, 'Installers', 'Social-Club*.exe'))[0]
+
+
+def get_update_rpf_path(gtav_dir):
+    return os.path.join(gtav_dir, 'update', 'update.rpf')
+
+
 def hash_large_file(file_path):
     """Avoid reading entire file into memory by setting block size to a reasonable value"""
     BLOCKSIZE = 2 ** 20
@@ -45,13 +55,15 @@ def hash_large_file(file_path):
 
 
 def restore_game_files(gtav_dir):
-    print('Downloading GTAV binaries - these are 665MB so this could take a while...')
+    print('Downloading GTAV binaries - these are 665MB, so could take a while...')
     location = urllib.urlretrieve('https://www.dropbox.com/sh/ymt2ja4st2mpvyd/AADZBlzxsxiEwQm15Y15nC1wa?dl=1')
     location = location[0]
     print('Extracting GTAV binaries from', location, 'to', gtav_dir)
     zip_ref = zipfile.ZipFile(location, 'r')
     zip_ref.extractall(gtav_dir)
     zip_ref.close()
+    shutil.move(os.path.join(gtav_dir, 'update.rpf'), get_update_rpf_path(gtav_dir))
+    shutil.move(os.path.join(gtav_dir, 'Social-Club-v1.1.9.6-Setup.exe'), get_social_club_path(gtav_dir))
     print('Finished extracting GTAV files, deleting temp file:', location)
     os.remove(location)
 
