@@ -14,6 +14,7 @@ import shutil
 import requests
 from datetime import datetime
 import utils
+from enforce_version import enforce_version
 
 # TODO: Rearrange directories for a proper import
 CURR_DIR = os.path.dirname(os.path.realpath(__file__))
@@ -36,6 +37,7 @@ def get_saved_games_profile_folders():
 def setup():
     replace_saved_games()
     utils.download_folder('https://www.dropbox.com/sh/fy6nha3ikm2ugij/AADm8SPKm5bX3Nl2qx69rCcYa?dl=1', GTAV_DIR)
+    enforce_version(GTAV_DIR)
 
 
 def replace_saved_games():
