@@ -35,8 +35,7 @@ def get_saved_games_profile_folders():
 
 def setup():
     replace_saved_games()
-    utils.download_folder('https://www.dropbox.com/sh/fy6nha3ikm2ugij/AADm8SPKm5bX3Nl2qx69rCcYa?dl=1',
-                        os.path.expanduser('~\\Documents\\%s\\' % GTAV_DIR))
+    utils.download_folder('https://www.dropbox.com/sh/fy6nha3ikm2ugij/AADm8SPKm5bX3Nl2qx69rCcYa?dl=1', GTAV_DIR)
 
 
 def replace_saved_games():
