@@ -37,43 +37,42 @@ def get_saved_games_profile_folders():
 
 def install_autoit():
     print('Installing AutoIT')
-    utils.download_folder('https://www.dropbox.com/s/09mtrrr42putjty/AutoIt3.zip?dl=1', WORKSPACE_DIR)
+    utils.download_folder('https://www.dropbox.com/s/09mtrrr42putjty/AutoIt3.zip?dl=1', WORKSPACE_DIR, delete_existing=True)
 
 
 def install_caffe():
     print('Installing Caffe')
-    utils.download_folder('https://www.dropbox.com/s/zt77lslfrmw28m4/caffe.zip?dl=1', WORKSPACE_DIR)
+    utils.download_folder('https://www.dropbox.com/s/zt77lslfrmw28m4/caffe.zip?dl=1', WORKSPACE_DIR, delete_existing=True)
 
 
 def install_obs():
     print('Installing OBS')
-    utils.download_folder('https://www.dropbox.com/s/v4p75gxyqy6t9pi/OBS-new.zip?dl=1', WORKSPACE_DIR)
+    utils.download_folder('https://www.dropbox.com/s/v4p75gxyqy6t9pi/OBS-new.zip?dl=1', WORKSPACE_DIR, delete_existing=True)
+
+
+def install_stuff_that_goes_in_gtav_dir():
+    print('Installing ScriptHookV and XBOX360CE to GTAV directory')
+    utils.download_folder('https://www.dropbox.com/sh/fy6nha3ikm2ugij/AADm8SPKm5bX3Nl2qx69rCcYa?dl=1', GTAV_DIR, delete_existing=False)
 
 
 def setup():
     replace_saved_games()
-    stuff_that_goes_in_gtav_dir()
+    install_stuff_that_goes_in_gtav_dir()
     enforce_version(GTAV_DIR)
     install_autoit()
     install_caffe()
     install_obs()
 
 
-def stuff_that_goes_in_gtav_dir():
-    print('Installing ScriptHookV and XBOX360CE to GTAV directory')
-    utils.download_folder('https://www.dropbox.com/sh/fy6nha3ikm2ugij/AADm8SPKm5bX3Nl2qx69rCcYa?dl=1', GTAV_DIR)
-
-
 def replace_saved_games():
-    # TODO: Make a backup copy to a timestamped folder in '~\\Documents\\GTAV_saved_games_backup_%timestamp%'
     saved_games_profile_folders = get_saved_games_profile_folders()
     location = urllib.urlretrieve('https://www.dropbox.com/sh/k1osqcufsubo754/AADCeXM4I1iYRz19bdO12pOba?dl=1')
     location = location[0]
     zip_ref = zipfile.ZipFile(location, 'r')
     backup_saved_games()
-    for saved_games_location in saved_games_profile_folders:
-        print('Replacing saved games in', saved_games_location)
-        zip_ref.extractall(saved_games_location)
+    for saved_games_profile_folder in saved_games_profile_folders:
+        print('Replacing saved games in', saved_games_profile_folder)
+        zip_ref.extractall(saved_games_profile_folder)
     zip_ref.close()
 
 

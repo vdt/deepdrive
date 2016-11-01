@@ -30,9 +30,10 @@ def download_file(url, path):
                 sys.stdout.flush()
 
 
-def download_folder(url, path):
+def download_folder(url, path, delete_existing=False):
     """Useful for downloading a folder / zip file from dropbox and unzipping it to path"""
-    shutil.rmtree(path)
+    if delete_existing:
+        shutil.rmtree(path)
     print('Downloading', url)
     location = urllib.urlretrieve(url)
     location = location[0]
