@@ -5,6 +5,7 @@ import os
 import sys
 import urllib
 import zipfile
+import shutil
 
 import requests
 
@@ -31,6 +32,7 @@ def download_file(url, path):
 
 def download_folder(url, path):
     """Useful for downloading a folder / zip file from dropbox and unzipping it to path"""
+    shutil.rmtree(path)
     print('Downloading', url)
     location = urllib.urlretrieve(url)
     location = location[0]
