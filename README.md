@@ -15,7 +15,7 @@ Now skip to the [Running](#running) instructions
 
 ## Install from scratch 
 
-This setup has been verified on Windows 7 Home, Windows 10 Home, and Windows 2012 Server on AWS.
+This setup has been verified on Windows 7 Home, Windows 10 Home, and Windows 2012 Server on AWS. Windows 7+ should work though.
 We recommend a local setup with a GPU that supports [CUDA](http://hilinkit.appspot.com/yxjkh5) architecture 5.0 and at least 16GB of RAM.
 
 ### AMI setup
