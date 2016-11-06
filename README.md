@@ -1,10 +1,15 @@
 # DeepDrive setup
 
-These instructions replicate the initial, all-Windows setup of DeepDrive. It is hacky, but it works. There is a parallel effort to integrate with OpenAI gym in which everything is much cleaner, but this is not in a publicly releasable state. If you’d like to contribute to this, get in touch at craig@deepdrive.com.
+These instructions replicate the initial, all-Windows setup of DeepDrive. It is hacky, but it works. It will allow you to drive around GTAV using a neural network defined in Caffe's model weight format. Other DL frameworks are not yet supported. There is a parallel effort to integrate with OpenAI gym in which everything is much cleaner, but this is not in a publicly releasable state. If you’d like to contribute to this, get in touch at craig@deepdrive.com.
 
 Also, this does not provide depth buffer extraction as a game update recently broke the way we hook the depth buffer. It should be a relatively simple fix though.
 
 Here we go!
+
+## Requirements
+* Windows 7+
+* 16GB RAM
+* NVIDIA GPU (ideally [CUDA](http://hilinkit.appspot.com/yxjkh5) architecture 5.0 - however binaries for 2.0+ are provided
 
 ## Use the pre-built AMI (not recommended except as a reference install)
 _Note that driving performance seems to be degraded due to possible latency and/or problems from an outdated cuda architecture. The car will still stay in the lane on this AMI like 50% of the time as opposed to 90% on a local install._
