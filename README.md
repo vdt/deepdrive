@@ -1,6 +1,6 @@
 # DeepDrive setup
 
-These instructions replicate the initial, all-Windows setup of DeepDrive. It is hacky, but it works. It will allow you to drive around GTAV using a neural network defined in Caffe's model weight format. Other DL frameworks are not yet supported. There is a parallel effort to integrate with OpenAI gym in which everything is much cleaner, but this is not in a publicly releasable state. If you’d like to contribute to this, get in touch at craig@deepdrive.com.
+These instructions replicate the initial, all-Windows setup of DeepDrive. It is hacky, but it works. This will allow you to drive around GTAV using a neural network defined in Caffe's model weight format (with the one shown in the videos provided as a default). Other DL frameworks are not supported yet. There is a parallel effort to integrate with OpenAI gym in which everything is much cleaner, but this is not in a publicly releasable state. If you’d like to contribute to this, get in touch at craig@deepdrive.com.
 
 Also, this does not provide depth buffer extraction as a game update recently broke the way we hook the depth buffer. It should be a relatively simple fix though.
 
